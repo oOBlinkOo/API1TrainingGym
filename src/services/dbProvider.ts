@@ -15,3 +15,8 @@ connection.query('SELECT * from  Ejercicios', function(err, rows, fields) {
 });
 
 connection.end();
+
+export function run(query: string, params?: any) {
+ var session = null;
+  var result = null;
+}
