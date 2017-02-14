@@ -3,7 +3,7 @@ var x= null;
 
 
 export function checkCredentials (email: string , password:string){
-    console.log('ya llegamos al dao yea babe');
-     let userModel
-    return 'ya please';
+    var params = { email: email.toLowerCase() };
+  return db.run('select * from usuarios',params);
+    // return 'ya please';
 }

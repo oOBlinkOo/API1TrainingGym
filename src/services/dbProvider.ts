@@ -7,16 +7,18 @@ var connection = mysql.createConnection({
   database: 'gymbd'
 })
 
+
+export function run(query: string, params?: any) {
+var result = null;
 connection.connect();
 
-connection.query('SELECT * from  Ejercicios', function(err, rows, fields) {
+connection.query(query,params, function(err, rows, fields) {
   if (err) throw err;
-  console.log('The solution is: ', rows[0].solution);
+  result=rows;
+  console.log('The solution is: ', result);
+  return result;
 });
 
 connection.end();
-
-export function run(query: string, params?: any) {
- var session = null;
-  var result = null;
+return result;
 }
