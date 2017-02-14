@@ -13,7 +13,11 @@ var result = null;
 connection.connect();
 
 connection.query(query,params, function(err, rows, fields) {
-  if (err) throw err;
+  if  (err) {
+    console.error('error connecting: ' + err.stack);
+    // return;
+     throw err;
+  }
   result=rows;
   console.log('The solution is: ', result);
   return result;
