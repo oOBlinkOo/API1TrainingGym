@@ -4,10 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+import * as router from './router';
 
 // var index = require('./routes/index');
-import * as router from './router';
-// var users = require('./routes/router');
+// var users = require('./routes/users');
 
 var app = express();
 
@@ -34,6 +34,7 @@ app.use(function(req, res, next) {
   console.log('testing this shit');
   next(err);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

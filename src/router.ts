@@ -1,4 +1,4 @@
-import * as LoginController from './controller/loginController';
+import * as LoginController from './controller/UserController';
 
 
 import express = require('express');
