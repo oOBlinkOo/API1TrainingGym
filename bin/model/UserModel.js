@@ -1,18 +1,11 @@
 "use strict";
 var UserModel = (function () {
     function UserModel() {
-        this.nodeId = null;
+        this.id_user = null;
         this.name = null;
-        this.email = null;
         this.password = null;
-        this.createdOn = null;
-        this.lastLogin = null;
-        this.lastGraph = null;
-        this.licenseExpiration = null;
-        this.profilePicture = null;
-        this.domainId = null;
-        this.token = null;
-        this.active = null;
+        this.typeuser = null;
+        this.email = null;
     }
     return UserModel;
 }());

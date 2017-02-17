@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 import * as router from './router';
@@ -25,12 +26,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', index);
 // app.use('/users', users);
+
+var originsWhitelist = [
+  'http://localhost:8100'      //this is my front-end url for development
+  //  'http://app.processtempo.com'
+];
+var corsOptions = {
+  origin: function(origin, callback){
+        var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+        callback(null, isWhitelisted);
+  },
+  credentials:true
+}
+app.use(cors(corsOptions));
 router.defineRoutes(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  // err.status = 404;
+    let err: any;
+  err = new Error('Not Found');
+    err.status = 404;
   console.log('testing this shit');
   next(err);
 });
@@ -44,7 +59,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+    res.json( err.message );
 });
 
 module.exports = app;

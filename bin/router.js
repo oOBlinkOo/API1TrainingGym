@@ -1,6 +1,6 @@
 "use strict";
-var LoginController = require("./controller/UserController");
+var UserController = require("./controller/UserController");
 function defineRoutes(app) {
-    app.use('/user', LoginController.router);
+    app.use('/user', UserController.router);
 }
 exports.defineRoutes = defineRoutes;

@@ -3,7 +3,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'root',
+    password: '',
     database: 'gymbd'
 });
 function run(query, params) {
@@ -17,9 +17,11 @@ function run(query, params) {
         }
         result = rows;
         console.log('The solution is: ', result);
+        connection.end();
         return result;
     });
-    connection.end();
+    console.log('llega?');
+    // connection.end();
     return result;
 }
 exports.run = run;
