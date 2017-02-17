@@ -25,7 +25,7 @@ function checkCredentials(email, password) {
     var query = null;
     query = 'select * from usuarios where email=?';
     console.log(query, email);
-    return db.run(query, email).then(function (result) {
+    return db.run2(query, email).then(function (result) {
         console.log('ya porfavor ', result);
         if (result.records.length == 1) {
             console.log('aqui esta fallando', result);
@@ -38,11 +38,11 @@ function checkCredentials(email, password) {
             return userModel;
         }
         else
-            console.log('hubo error1');
+            console.log('hubo error1 en el null');
         return null;
     })
         .catch(function (err) {
-        console.log('hubo error');
+        console.log('hubo error user dao catch');
         console.log(err);
     });
     // return 'ya please';

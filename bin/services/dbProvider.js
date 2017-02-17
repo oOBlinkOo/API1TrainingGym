@@ -1,12 +1,13 @@
 "use strict";
 var mysql = require('mysql');
+var Promise = require('promise');
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'gymbd'
 });
-function run(query, params) {
+function run(query, params, callback) {
     var result = null;
     connection.connect();
     try {
@@ -21,7 +22,8 @@ function run(query, params) {
             console.log('The solution is: ', result);
             console.log('ni idea', err);
             // console.log ('ni fields',fields);
-            return rows;
+            callback(null, rows);
+            // return rows;
         });
     }
     catch (error) {
@@ -34,12 +36,24 @@ function run(query, params) {
     return result;
 }
 exports.run = run;
-// exports.run2 = function(query, params, done) {
-//   connection.connect();
-//      connection.query(query,params,function(err,rows,fields){
-//        connection.end();
-//         console.log('The solution is: ', rows)
-//         console.log ('ni idea',err);
-//        done(null ,rows);
-//      });
-// }
+function run2(query, params) {
+    connection.connect();
+    return new Promise(function (fulfill, reject) {
+        connection.query(query, params, function (err, rows, fields) {
+            if (err) {
+                console.error('error connecting: ' + err.stack);
+                throw err;
+            }
+        }).done(function (res) {
+            try {
+                console.log('el fucking run 2 res');
+                fulfill(res);
+            }
+            catch (ex) {
+                console.log('el fucking run 2 issue');
+                reject(ex);
+            }
+        }, reject); //done
+    });
+}
+exports.run2 = run2;

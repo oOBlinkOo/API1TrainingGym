@@ -30,7 +30,7 @@ export function checkCredentials (email: string , password:string){
  query = 'select * from usuarios where email=?';
   console.log (query,email);
  
-  return db.run(query,email).then(result => {
+  return db.run2(query,email).then(result => {
     console.log ('ya porfavor ',result);
       if (result.records.length == 1) {
         console.log('aqui esta fallando',result);
@@ -43,11 +43,11 @@ export function checkCredentials (email: string , password:string){
         return userModel;
       }
       else
-      console.log ('hubo error1');
+      console.log ('hubo error1 en el null');
         return null;
     })
     .catch(function (err) {
-      console.log ('hubo error');
+      console.log ('hubo error user dao catch');
       console.log(err);
     });
     // return 'ya please';
