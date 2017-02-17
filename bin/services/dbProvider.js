@@ -1,3 +1,4 @@
+"use strict";
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -5,14 +6,20 @@ var connection = mysql.createConnection({
     password: 'root',
     database: 'gymbd'
 });
-connection.connect();
-connection.query('SELECT * from  Ejercicios', function (err, rows, fields) {
-    if (err)
-        throw err;
-    console.log('The solution is: ', rows[0].solution);
-});
-connection.end();
-// export function run(query: string, params?: any) {
-//  var session = null;
-//   var result = null;
-// } 
+function run(query, params) {
+    var result = null;
+    connection.connect();
+    connection.query(query, params, function (err, rows, fields) {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            // return;
+            throw err;
+        }
+        result = rows;
+        console.log('The solution is: ', result);
+        return result;
+    });
+    connection.end();
+    return result;
+}
+exports.run = run;
