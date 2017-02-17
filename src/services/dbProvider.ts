@@ -48,20 +48,15 @@ return new Promise(function (fulfill, reject){
             connection.query(query,params,function(err,rows,fields){
          if  (err) {
           console.error('error connecting: ' + err.stack);
-          throw err;
-        }
-      }).done(
-      function (res){
-        try {
-          console.log('el fucking run 2 res');
-        fulfill(res);
-      } catch (ex) {
-        console.log('el fucking run 2 issue');
-        reject(ex);
-      }
 
-    },reject
-    ); //done
+          // throw err;
+          return reject(err);
+          
+        }
+        fulfill(rows);
+
+
+      }); //done
 
 });
 

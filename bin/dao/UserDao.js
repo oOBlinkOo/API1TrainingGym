@@ -27,9 +27,9 @@ function checkCredentials(email, password) {
     console.log(query, email);
     return db.run2(query, email).then(function (result) {
         console.log('ya porfavor ', result);
-        if (result.records.length == 1) {
+        if (result[0].member_active == 1) {
             console.log('aqui esta fallando', result);
-            var userModel = Translator.JsonToUser(result.records[0]);
+            var userModel = Translator.JsonToUser(result);
             // if (passwordHash.verify(password, userModel.password))
             //   return userModel;
             // else

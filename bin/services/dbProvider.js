@@ -42,18 +42,11 @@ function run2(query, params) {
         connection.query(query, params, function (err, rows, fields) {
             if (err) {
                 console.error('error connecting: ' + err.stack);
-                throw err;
+                // throw err;
+                return reject(err);
             }
-        }).done(function (res) {
-            try {
-                console.log('el fucking run 2 res');
-                fulfill(res);
-            }
-            catch (ex) {
-                console.log('el fucking run 2 issue');
-                reject(ex);
-            }
-        }, reject); //done
+            fulfill(rows);
+        }); //done
     });
 }
 exports.run2 = run2;

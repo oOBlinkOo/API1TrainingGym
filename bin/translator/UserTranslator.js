@@ -16,11 +16,11 @@ function JsonToUser(json) {
     // newModel.token = json._fields[json._fieldLookup['token']];
     // newModel.active = json._fields[json._fieldLookup['active']]['low'];
     newModel.id_user = json._fields[json._fieldLookup['id_user']];
-    newModel.name = json._fields[json._fieldLookup['name']];
-    newModel.password = json._fields[json._fieldLookup['password']];
-    newModel.typeuser = json._fields[json._fieldLookup['typeuser']];
-    newModel.member_active = json._fields[json._fieldLookup['member_active']];
-    newModel.email = json._fields[json._fieldLookup['email']];
+    newModel.name = json.properties.name;
+    newModel.password = json.properties.password;
+    newModel.typeuser = json.properties.typeuser;
+    newModel.member_active = json.properties.member_active;
+    newModel.email = json.properties.email;
     return newModel;
 }
 exports.JsonToUser = JsonToUser;
