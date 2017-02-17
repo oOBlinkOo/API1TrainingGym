@@ -15,12 +15,12 @@ function JsonToUser(json) {
     // newModel.domainId = json._fields[json._fieldLookup['domainId']];
     // newModel.token = json._fields[json._fieldLookup['token']];
     // newModel.active = json._fields[json._fieldLookup['active']]['low'];
-    newModel.id_user = json._fields[json._fieldLookup['id_user']];
-    newModel.name = json.properties.name;
-    newModel.password = json.properties.password;
-    newModel.typeuser = json.properties.typeuser;
-    newModel.member_active = json.properties.member_active;
-    newModel.email = json.properties.email;
+    newModel.id_user = json.id_user;
+    newModel.name = json.name;
+    newModel.password = json.password;
+    newModel.typeuser = json.typeuser;
+    newModel.member_active = json.member_active;
+    newModel.email = json.email;
     return newModel;
 }
 exports.JsonToUser = JsonToUser;
