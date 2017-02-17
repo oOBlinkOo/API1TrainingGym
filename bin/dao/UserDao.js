@@ -38,9 +38,11 @@ function checkCredentials(email, password) {
             return userModel;
         }
         else
-            return null;
+            console.log('hubo error1');
+        return null;
     })
         .catch(function (err) {
+        console.log('hubo error');
         console.log(err);
     });
     // return 'ya please';

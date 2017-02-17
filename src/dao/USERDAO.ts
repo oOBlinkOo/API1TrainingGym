@@ -22,11 +22,14 @@ var passwordHash = require('password-hash');
 //     // return 'ya please';
 // }
 
+
+
 export function checkCredentials (email: string , password:string){
     var params = { email: email.toLowerCase() };
     var query :string = null;
  query = 'select * from usuarios where email=?';
   console.log (query,email);
+ 
   return db.run(query,email).then(result => {
     console.log ('ya porfavor ',result);
       if (result.records.length == 1) {
@@ -40,9 +43,11 @@ export function checkCredentials (email: string , password:string){
         return userModel;
       }
       else
+      console.log ('hubo error1');
         return null;
     })
     .catch(function (err) {
+      console.log ('hubo error');
       console.log(err);
     });
     // return 'ya please';
