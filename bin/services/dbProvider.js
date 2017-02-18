@@ -43,8 +43,10 @@ function run2(query, params) {
             if (err) {
                 console.error('error connecting: ' + err.stack);
                 // throw err;
+                connection.end();
                 return reject(err);
             }
+            connection.end();
             fulfill(rows);
         }); //done
     });

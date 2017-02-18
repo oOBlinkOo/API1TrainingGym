@@ -50,9 +50,11 @@ return new Promise(function (fulfill, reject){
           console.error('error connecting: ' + err.stack);
 
           // throw err;
+          connection.end();
           return reject(err);
           
         }
+        connection.end();
         fulfill(rows);
 
 
