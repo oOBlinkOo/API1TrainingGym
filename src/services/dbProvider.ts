@@ -5,40 +5,40 @@ var connection ;
 
 
 
-export function run(query: string, params?: any, callback ?: any)  {
-var result = null;
+// export function run(query: string, params?: any, callback ?: any)  {
+// var result = null;
 
-connection.connect();
+// connection.connect();
 
-try {
-  console.log('1');
-  connection.query(query,params,function(err,rows,fields){
-    console.log('2');
-      if  (err) {
-          console.error('error connecting: ' + err.stack);
-          throw err;
-        }
-        result=rows;
-        console.log('The solution is: ', result)
-        console.log ('ni idea',err);
-        // console.log ('ni fields',fields);
-        callback(null,rows)
-        // return rows;
+// try {
+//   console.log('1');
+//   connection.query(query,params,function(err,rows,fields){
+//     console.log('2');
+//       if  (err) {
+//           console.error('error connecting: ' + err.stack);
+//           throw err;
+//         }
+//         result=rows;
+//         console.log('The solution is: ', result)
+//         console.log ('ni idea',err);
+//         // console.log ('ni fields',fields);
+//         callback(null,rows)
+//         // return rows;
 
-      });
-} catch (error) {
-  console.log('3');
-  console.log ('disable for testing waaat',error);
-  connection.end();
+//       });
+// } catch (error) {
+//   console.log('3');
+//   console.log ('disable for testing waaat',error);
+//   connection.end();
 
-}
-console.log('4');
-console.log('llego al final del metodo run',result);
-return result;
-}
+// }
+// console.log('4');
+// console.log('llego al final del metodo run',result);
+// return result;
+// }
 
 export function run2(query: string, params?: any)  {
-  console.log('1');
+  // console.log('1');
   connection= mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -53,17 +53,17 @@ return new Promise(function (fulfill, reject){
 
           // throw err;
           connection.end();
-          console.log('3');
+          // console.log('3');
           return reject(err);
           
         }
-        console.log('2');
+        // console.log('2');
         connection.end();
         fulfill(rows);
 
 
       }); //done
-console.log('4');
+// console.log('4');
 });
 
 }
