@@ -31,14 +31,22 @@ var originsWhitelist = [
   'http://localhost:8100'      //this is my front-end url for development
   //  'http://app.processtempo.com'
 ];
+// var corsOptions = {
+//   origin: function(origin, callback){
+//         var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+//         callback(null, isWhitelisted);
+//   },
+//   credentials:true
+// }
+
 var corsOptions = {
-  origin: function(origin, callback){
-        var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
-        callback(null, isWhitelisted);
-  },
+  origin: true,
   credentials:true
 }
+
 app.use(cors(corsOptions));
+// app.options('*', cors());
+
 router.defineRoutes(app);
 
 // catch 404 and forward to error handler
