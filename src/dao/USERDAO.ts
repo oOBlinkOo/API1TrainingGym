@@ -39,7 +39,7 @@ export function checkCredentials (email: string , password:string){
         //   return userModel;
         // else
         //   return null;
-        console.log('aquii estoy hija',result)
+        console.log('aquii estoy hija',result);
         return result;
       }
       else
