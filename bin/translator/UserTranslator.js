@@ -1,6 +1,7 @@
 "use strict";
 var Models = require("../model/UserModel");
 function JsonToUser(json) {
+    console.log('antes de cagarla ', json);
     var newModel = new Models.UserModel();
     //record._fields[0].properties;
     // newModel.name = json._fields[json._fieldLookup['name']];
@@ -15,7 +16,7 @@ function JsonToUser(json) {
     // newModel.domainId = json._fields[json._fieldLookup['domainId']];
     // newModel.token = json._fields[json._fieldLookup['token']];
     // newModel.active = json._fields[json._fieldLookup['active']]['low'];
-    newModel.id_user = json.id_user;
+    newModel.id_user = json._fields[json._fieldLookup['id_user']];
     newModel.name = json.name;
     newModel.password = json.password;
     newModel.typeuser = json.typeuser;

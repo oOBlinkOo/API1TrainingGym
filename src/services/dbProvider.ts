@@ -1,12 +1,7 @@
 var mysql = require('mysql');
 var Promise = require('promise');
 
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'gymbd'
-})
+var connection ;
 
 
 
@@ -43,6 +38,13 @@ return result;
 }
 
 export function run2(query: string, params?: any)  {
+  console.log('1');
+  connection= mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'gymbd'
+})
   connection.connect();
 return new Promise(function (fulfill, reject){
             connection.query(query,params,function(err,rows,fields){
@@ -51,15 +53,17 @@ return new Promise(function (fulfill, reject){
 
           // throw err;
           connection.end();
+          console.log('3');
           return reject(err);
           
         }
+        console.log('2');
         connection.end();
         fulfill(rows);
 
 
       }); //done
-
+console.log('4');
 });
 
 }

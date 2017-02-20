@@ -1,12 +1,7 @@
 "use strict";
 var mysql = require('mysql');
 var Promise = require('promise');
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'gymbd'
-});
+var connection;
 function run(query, params, callback) {
     var result = null;
     connection.connect();
@@ -37,6 +32,13 @@ function run(query, params, callback) {
 }
 exports.run = run;
 function run2(query, params) {
+    console.log('1');
+    connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'gymbd'
+    });
     connection.connect();
     return new Promise(function (fulfill, reject) {
         connection.query(query, params, function (err, rows, fields) {
@@ -44,11 +46,14 @@ function run2(query, params) {
                 console.error('error connecting: ' + err.stack);
                 // throw err;
                 connection.end();
+                console.log('3');
                 return reject(err);
             }
+            console.log('2');
             connection.end();
             fulfill(rows);
         }); //done
+        console.log('4');
     });
 }
 exports.run2 = run2;

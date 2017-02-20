@@ -1,6 +1,5 @@
 "use strict";
 var db = require("../services/dbProvider");
-var Translator = require("../translator/UserTranslator");
 var passwordHash = require('password-hash');
 // export function checkCredentials (email: string , password:string){
 //     var params = { email: email.toLowerCase() };
@@ -29,13 +28,13 @@ function checkCredentials(email, password) {
         console.log('ya porfavor ', result);
         if (result[0].member_active == 1) {
             console.log('aqui esta fallando', result);
-            var userModel = Translator.JsonToUser(result);
+            // let userModel = Translator.JsonToUser(result);
             // if (passwordHash.verify(password, userModel.password))
             //   return userModel;
             // else
             //   return null;
-            console.log('aquii estoy hija', userModel);
-            return userModel;
+            console.log('aquii estoy hija', result);
+            return result;
         }
         else
             console.log('hubo error1 en el null');

@@ -1,6 +1,7 @@
 import * as Models from '../model/UserModel';
 export function JsonToUser(json): Models.UserModel
 {
+    console.log('antes de cagarla ',json);
     let newModel = new Models.UserModel();
      //record._fields[0].properties;
     // newModel.name = json._fields[json._fieldLookup['name']];
@@ -16,7 +17,7 @@ export function JsonToUser(json): Models.UserModel
     // newModel.token = json._fields[json._fieldLookup['token']];
     // newModel.active = json._fields[json._fieldLookup['active']]['low'];
 
-        newModel.id_user = json.id_user;
+        newModel.id_user = json._fields[json._fieldLookup['id_user']];
         newModel.name = json.name;
         newModel.password = json.password;
         newModel.typeuser = json.typeuser;

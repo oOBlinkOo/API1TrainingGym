@@ -40,6 +40,7 @@ router.post('/login', function(req, res, next) {
             req.session['user'] = userModel;
           }
           res.statusCode = 200;
+          console.log(userModel);
           res.send(userModel);
       }
       else{  
