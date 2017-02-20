@@ -38,12 +38,16 @@ var connection ;
 // }
 
 export function run2(query: string, params?: any)  {
-  // console.log('1');
+  console.log('cauntas conexiones pasan?');
   connection= mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'gymbd'
+  host: 'us-cdbr-iron-east-04.cleardb.net',
+  user: 'b8aa64b5fea4e4',
+  password: '4e42143e',
+  database: 'heroku_5addddbb07eeeed'
+  // host: 'localhost',
+  // user: 'root',
+  // password: '',
+  // database: 'gymbd'
 })
   connection.connect();
 return new Promise(function (fulfill, reject){
@@ -52,18 +56,18 @@ return new Promise(function (fulfill, reject){
           console.error('error connecting: ' + err.stack);
 
           // throw err;
-          connection.end();
-          // console.log('3');
+          connection.destroy();
+          console.log('3');
           return reject(err);
           
         }
-        // console.log('2');
-        connection.end();
+        console.log('2');
+        connection.destroy();
         fulfill(rows);
 
 
       }); //done
-// console.log('4');
+console.log('termino el promise');
 });
 
 }
