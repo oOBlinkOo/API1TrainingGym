@@ -83,3 +83,11 @@ console.log('termino el promise');
 });
 
 }
+
+export function killPool(){
+  return new Promise(function (fulfill, reject){
+    pool.end(function (err) {
+    console.log('kill Pools ',err);
+    });
+  });
+}
