@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var db = require("../services/dbProvider");
 var passwordHash = require('password-hash');
 // export function checkCredentials (email: string , password:string){

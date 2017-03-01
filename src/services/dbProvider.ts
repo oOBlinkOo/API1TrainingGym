@@ -2,14 +2,14 @@ var mysql = require('mysql');
 var Promise = require('promise');
 
 var pool = mysql.createPool({
-  // host: 'us-cdbr-iron-east-04.cleardb.net',
-  // user: 'b8aa64b5fea4e4',
-  // password: '4e42143e',
-  // database: 'heroku_5addddbb07eeeed'
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'gymbd'
+  host: 'us-cdbr-iron-east-04.cleardb.net',
+  user: 'b8aa64b5fea4e4',
+  password: '4e42143e',
+  database: 'heroku_5addddbb07eeeed'
+  // host: 'localhost',
+  // user: 'root',
+  // password: '',
+  // database: 'gymbd'
 }) ;
 
 

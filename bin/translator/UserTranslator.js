@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Models = require("../model/UserModel");
 function JsonToUser(json) {
     console.log('antes de cagarla ', json);

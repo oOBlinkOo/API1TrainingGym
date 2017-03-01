@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/users', users);
 var originsWhitelist = [
     'http://localhost:8100' //this is my front-end url for development
+    //  'http://app.processtempo.com'
 ];
 // var corsOptions = {
 //   origin: function(origin, callback){
