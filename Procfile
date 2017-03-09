@@ -1,1 +1,1 @@
-web: npm run update && npm start
+web: npm run go
