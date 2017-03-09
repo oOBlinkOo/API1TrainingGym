@@ -4,6 +4,8 @@ var express = require("express");
 var userDAO = require("../dao/UserDao");
 var nodemailer = require('nodemailer');
 var mg = require('nodemailer-mailgun-transport');
+// http://localhost:8100/
+var siteUrl = process.env.UI_URL || 'http://localhost:3000';
 exports.router = express.Router();
 /* GET home page. */
 // router.get('/login', function(req, res, next) {
@@ -67,11 +69,12 @@ exports.router.post('/register', function (req, res, next) {
                 }
             };
             var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+            console.log(siteUrl);
             nodemailerMailgun.sendMail({
                 from: 'test@gymtrainning.com',
                 to: req.body.email,
                 subject: 'Activate your Process Tempo Account!',
-                html: '<b>Please click the link below</b><p><a href="' + 'www.aguantalascarnes' + '/public/user/activate/' + response.token + '">Activate you account!</a></p>',
+                html: '<b>Please click the link below</b><p><a href="' + siteUrl + '/user/activate/' + response.token + '">Activate you account!</a></p>',
             }, function (err, info) {
                 if (err) {
                     console.log('Error: ' + err);
@@ -90,4 +93,12 @@ exports.router.post('/register', function (req, res, next) {
         res.statusCode = 500;
         res.json(error);
     });
+});
+exports.router.get('/activate/:token', function (req, res) {
+    if (req.params.token) {
+        var token = req.params.token;
+        userDAO.activateAccount(token).then(function (data) { return res.json(data); });
+    }
+    else
+        return res.json(null);
 });

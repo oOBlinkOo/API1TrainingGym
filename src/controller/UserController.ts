@@ -4,7 +4,8 @@ import * as userModel from '../model/UserModel';
 
 var nodemailer = require('nodemailer');
 var mg = require('nodemailer-mailgun-transport');
-
+// http://localhost:8100/
+var siteUrl = process.env.UI_URL || 'http://localhost:3000';
 export var router:express.Router = express.Router();
 
 /* GET home page. */
@@ -85,11 +86,12 @@ router.post('/register', function(req, res, next) {
                 }
             }
          var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+         console.log(siteUrl);
            nodemailerMailgun.sendMail({
             from: 'test@gymtrainning.com',
             to: req.body.email, // An array if you have multiple recipients.
             subject: 'Activate your Process Tempo Account!',
-            html: '<b>Please click the link below</b><p><a href="'+'www.aguantalascarnes'+'/public/user/activate/' + response.token + '">Activate you account!</a></p>',
+            html: '<b>Please click the link below</b><p><a href="'+siteUrl+'/user/activate/' + response.token + '">Activate you account!</a></p>',
             }, function (err, info) {
                 if (err) {
                     console.log('Error: ' + err);
@@ -114,6 +116,16 @@ router.post('/register', function(req, res, next) {
     });
 
 
+});
+
+router.get('/activate/:token', function(req, res) {  
+  if(req.params.token)
+  {
+      let token = req.params.token;
+      userDAO.activateAccount(token).then(data => res.json(data) );
+  }
+  else
+      return res.json(null);
 });
 
 

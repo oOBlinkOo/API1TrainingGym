@@ -104,3 +104,26 @@ console.log (query,params);
     });
     // return 'ya please';
 }
+
+
+export function activateAccount(token: string) {
+  var params = { token: token };
+
+  var query:string =null;
+  query="update usuarios set member_active=1 where  ?";
+   return db.run2(query, params)
+    .then(result => {
+      // var res: any;
+      // res = [];
+      // result.records.forEach(r => {
+      //   res.push({ email: r._fields[r._fieldLookup['email']] });
+      // });
+      // if (res.length == 0)
+      //   res = false;
+      // return res;
+      return result;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+}

@@ -60,7 +60,7 @@ exports.checkCredentials = checkCredentials;
 function register(firstName, lastName, birth, gender, password, email) {
     var typeuser = 'admin';
     var token = uuid.v1();
-    var member_active = 1;
+    var member_active = 0;
     var params = [firstName,
         lastName,
         birth,
@@ -94,3 +94,24 @@ function register(firstName, lastName, birth, gender, password, email) {
     // return 'ya please';
 }
 exports.register = register;
+function activateAccount(token) {
+    var params = { token: token };
+    var query = null;
+    query = "update usuarios set member_active=1 where  ?";
+    return db.run2(query, params)
+        .then(function (result) {
+        // var res: any;
+        // res = [];
+        // result.records.forEach(r => {
+        //   res.push({ email: r._fields[r._fieldLookup['email']] });
+        // });
+        // if (res.length == 0)
+        //   res = false;
+        // return res;
+        return result;
+    })
+        .catch(function (err) {
+        console.log(err);
+    });
+}
+exports.activateAccount = activateAccount;
