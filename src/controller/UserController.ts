@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as userDAO from '../dao/UserDao';
 import * as userModel from '../model/UserModel';
+var nodemailer = require('nodemailer');
+var mg = require('nodemailer-mailgun-transport');
 
 export var router:express.Router = express.Router();
 
@@ -72,12 +74,35 @@ router.post('/register', function(req, res, next) {
             req.session['user'] = userModel;
           }
           res.statusCode = 200;
-          console.log(userModel);
+          console.log('estoy en el usercontroller este es el usermodel lets gogo',userModel);
+             var auth = {
+                auth: {
+                    api_key: 'key-1cd4762f5aae084c3f8098c9c5bc5b02',
+                    domain: 'sandbox69ce2f85c7db4616b0db058df5b5c621.mailgun.org'
+                }
+            }
+         var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+           nodemailerMailgun.sendMail({
+            from: 'test@gymtrainning.com',
+            to: req.body.email, // An array if you have multiple recipients.
+            subject: 'Activate your Process Tempo Account!',
+            html: '<b>Please click the link below</b><p><a href="'+'www.aguantalascarnes'+'/public/user/activate/' + 'token que no tengo' + '">Activate you account!</a></p>',
+            }, function (err, info) {
+                if (err) {
+                    console.log('Error: ' + err);
+                }
+                else {
+                    console.log('Response: ' + JSON.stringify(info));
+                }
+            });
+
           res.send(userModel);
+
+
       }
       else{  
           res.statusCode = 200;
-          res.send(false);
+          res.send('User Was not Register');
       }
   })
     .catch(error => {
