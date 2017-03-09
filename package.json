@@ -5,12 +5,15 @@
   "scripts": {
     "serve": "npm run update && npm start",
     "start": "node ./bin/www",
-    "update": "node ./node_modules/typescript/bin/tsc"
+    "go": "node ./node_modules/typescript/bin/tsc && copyfiles -u 1  src/views/*.jade ./bin/ && npm start"
+    
+    
   },
   "dependencies": {
     "@types/node": "^7.0.5",
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
+    "copyfiles": "^1.2.0",
     "cors": "^2.8.1",
     "debug": "~2.6.0",
     "express": "~4.14.1",

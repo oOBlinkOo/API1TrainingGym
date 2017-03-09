@@ -122,7 +122,10 @@ router.get('/activate/:token', function(req, res) {
   if(req.params.token)
   {
       let token = req.params.token;
-      userDAO.activateAccount(token).then(data => res.json(data) );
+      userDAO.activateAccount(token).then(data =>
+    //    res.json(data)
+      res.render('index', { title: 'Gym Trainning', message: 'Your Account has been activated!'})
+        );
   }
   else
       return res.json(null);

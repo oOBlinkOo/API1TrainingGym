@@ -97,7 +97,10 @@ exports.router.post('/register', function (req, res, next) {
 exports.router.get('/activate/:token', function (req, res) {
     if (req.params.token) {
         var token = req.params.token;
-        userDAO.activateAccount(token).then(function (data) { return res.json(data); });
+        userDAO.activateAccount(token).then(function (data) {
+            //    res.json(data)
+            return res.render('index', { title: 'Gym Trainning', message: 'Your Account has been activated!' });
+        });
     }
     else
         return res.json(null);
