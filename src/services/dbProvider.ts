@@ -80,6 +80,7 @@ return new Promise(function (fulfill, reject){
         }
         console.log('2');
         connection.release();
+        console.log('rowsrows',rows,err,fields);
         fulfill(rows);
 
 

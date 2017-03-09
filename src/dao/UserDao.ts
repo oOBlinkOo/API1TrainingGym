@@ -1,6 +1,7 @@
 import * as db from '../services/dbProvider';
 import * as Translator from '../translator/UserTranslator'
 var passwordHash = require('password-hash');
+var uuid = require('uuid');
 
 
 // export function checkCredentials (email: string , password:string){
@@ -26,6 +27,7 @@ var passwordHash = require('password-hash');
 
 export function checkCredentials (email: string , password:string){
   // var tempEmail = email.toLowerCase();
+    
     var params = { email:email.toLowerCase() };
     // var params = [email];
     var query :string = null;
@@ -65,18 +67,9 @@ export function checkCredentials (email: string , password:string){
 
 export function register (firstName: string , lastName:string , birth:string , gender:string,password:string,email:string){
   var typeuser='admin';
-  var member_active=1;
-  // var gym_if=null;
-  // var gym_id=null;
-    // var params = {  name:firstName,
-    //                 last_name:lastName,
-    //                 birthdate:birth,
-    //                 gender:gender,
-    //                 password:password,
-    //                 typeuser:typeuser,
-    //                 member_active:member_active,
-    //                 email: email.toLowerCase() 
-    //               };
+  var token = uuid.v1();
+  var member_active=0;
+
     var params = [  firstName,
                     lastName,
                    birth,
@@ -84,19 +77,21 @@ export function register (firstName: string , lastName:string , birth:string , g
                     password,
                     typeuser,
                     member_active,
-                    email.toLowerCase() 
+                    email.toLowerCase() ,
+                    token
                   ];
     var query :string = null;
- query = "INSERT INTO usuarios (`id_user`, `name`,`last_name`,`birthdate`,`gender`, `password`, `typeuser`, `member_active`, `email`)";
+ query = "INSERT INTO usuarios (`id_user`, `name`,`last_name`,`birthdate`,`gender`, `password`, `typeuser`, `member_active`, `email`,`token`)";
 query = query +
-'VALUES  (null,?,?,?,?,?,?,?,?)' ;
+'VALUES  (null,?,?,?,?,?,?,?,?,?)' ;
 console.log (query,params);
 
  
   return db.run2(query,params).then(result => {
     console.log('show me the money',result);
       if (result!= null) {
-        
+      result['token']=token;
+      // console.log('show me the money2',result);
         return result;
       }
       else

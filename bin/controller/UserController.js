@@ -51,13 +51,15 @@ exports.router.post('/login', function (req, res, next) {
 });
 exports.router.post('/register', function (req, res, next) {
     console.log('registerUserController');
-    userDAO.register(req.body.firstName, req.body.lastName, req.body.birth, req.body.gender, req.body.password, req.body.email).then(function (userModel) {
-        if (userModel != null) {
-            if (userModel.member_active == 1) {
-                req.session['user'] = userModel;
+    userDAO.register(req.body.firstName, req.body.lastName, req.body.birth, req.body.gender, req.body.password, req.body.email).then(function (response) {
+        if (response != null) {
+            if (response.member_active == 1) {
+                req.session['user'] = response;
             }
             res.statusCode = 200;
-            console.log('estoy en el usercontroller este es el usermodel lets gogo', userModel);
+            console.log('antes de enviar la respuesta', response);
+            res.send(response);
+            //   console.log('mandando el correo',userModel);
             var auth = {
                 auth: {
                     api_key: 'key-1cd4762f5aae084c3f8098c9c5bc5b02',
@@ -66,10 +68,10 @@ exports.router.post('/register', function (req, res, next) {
             };
             var nodemailerMailgun = nodemailer.createTransport(mg(auth));
             nodemailerMailgun.sendMail({
-                from: 'postmaster@sandbox69ce2f85c7db4616b0db058df5b5c621.mailgun.org',
+                from: 'test@gymtrainning.com',
                 to: req.body.email,
                 subject: 'Activate your Process Tempo Account!',
-                html: '<b>Please click the link below</b><p><a href="' + 'www.aguantalascarnes' + '/public/user/activate/' + 'token que no tengo' + '">Activate you account!</a></p>',
+                html: '<b>Please click the link below</b><p><a href="' + 'www.aguantalascarnes' + '/public/user/activate/' + response.token + '">Activate you account!</a></p>',
             }, function (err, info) {
                 if (err) {
                     console.log('Error: ' + err);
@@ -78,7 +80,6 @@ exports.router.post('/register', function (req, res, next) {
                     console.log('Response: ' + JSON.stringify(info));
                 }
             });
-            res.send(userModel);
         }
         else {
             res.statusCode = 200;

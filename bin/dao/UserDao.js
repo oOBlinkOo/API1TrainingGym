@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var db = require("../services/dbProvider");
 var passwordHash = require('password-hash');
+var uuid = require('uuid');
 // export function checkCredentials (email: string , password:string){
 //     var params = { email: email.toLowerCase() };
 //   return db.run('select email,password from usuarios',params).then(result => {
@@ -58,18 +59,8 @@ exports.checkCredentials = checkCredentials;
 //                   ,req.body.email
 function register(firstName, lastName, birth, gender, password, email) {
     var typeuser = 'admin';
+    var token = uuid.v1();
     var member_active = 1;
-    // var gym_if=null;
-    // var gym_id=null;
-    // var params = {  name:firstName,
-    //                 last_name:lastName,
-    //                 birthdate:birth,
-    //                 gender:gender,
-    //                 password:password,
-    //                 typeuser:typeuser,
-    //                 member_active:member_active,
-    //                 email: email.toLowerCase() 
-    //               };
     var params = [firstName,
         lastName,
         birth,
@@ -77,16 +68,19 @@ function register(firstName, lastName, birth, gender, password, email) {
         password,
         typeuser,
         member_active,
-        email.toLowerCase()
+        email.toLowerCase(),
+        token
     ];
     var query = null;
-    query = "INSERT INTO usuarios (`id_user`, `name`,`last_name`,`birthdate`,`gender`, `password`, `typeuser`, `member_active`, `email`)";
+    query = "INSERT INTO usuarios (`id_user`, `name`,`last_name`,`birthdate`,`gender`, `password`, `typeuser`, `member_active`, `email`,`token`)";
     query = query +
-        'VALUES  (null,?,?,?,?,?,?,?,?)';
+        'VALUES  (null,?,?,?,?,?,?,?,?,?)';
     console.log(query, params);
     return db.run2(query, params).then(function (result) {
         console.log('show me the money', result);
         if (result != null) {
+            result['token'] = token;
+            // console.log('show me the money2',result);
             return result;
         }
         else

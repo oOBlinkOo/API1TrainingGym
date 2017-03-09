@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as userDAO from '../dao/UserDao';
 import * as userModel from '../model/UserModel';
+
 var nodemailer = require('nodemailer');
 var mg = require('nodemailer-mailgun-transport');
 
@@ -66,15 +67,17 @@ router.post('/register', function(req, res, next) {
                   ,req.body.gender
                   ,req.body.password
                   ,req.body.email
-                  ).then(function(userModel:userModel.UserModel){
-      if(userModel != null)
+                  ).then(function(response){
+      if(response != null)
       {
-          if (userModel.member_active == 1)
+          if (response.member_active == 1)
           {
-            req.session['user'] = userModel;
+            req.session['user'] = response;
           }
           res.statusCode = 200;
-          console.log('estoy en el usercontroller este es el usermodel lets gogo',userModel);
+          console.log('antes de enviar la respuesta',response)
+          res.send(response);
+        //   console.log('mandando el correo',userModel);
              var auth = {
                 auth: {
                     api_key: 'key-1cd4762f5aae084c3f8098c9c5bc5b02',
@@ -86,7 +89,7 @@ router.post('/register', function(req, res, next) {
             from: 'test@gymtrainning.com',
             to: req.body.email, // An array if you have multiple recipients.
             subject: 'Activate your Process Tempo Account!',
-            html: '<b>Please click the link below</b><p><a href="'+'www.aguantalascarnes'+'/public/user/activate/' + 'token que no tengo' + '">Activate you account!</a></p>',
+            html: '<b>Please click the link below</b><p><a href="'+'www.aguantalascarnes'+'/public/user/activate/' + response.token + '">Activate you account!</a></p>',
             }, function (err, info) {
                 if (err) {
                     console.log('Error: ' + err);
@@ -96,7 +99,7 @@ router.post('/register', function(req, res, next) {
                 }
             });
 
-          res.send(userModel);
+     
 
 
       }
