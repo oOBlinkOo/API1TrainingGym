@@ -110,18 +110,29 @@ export function activateAccount(token: string) {
   var params = { token: token };
 
   var query:string =null;
+  var queryForCheck:string =null;
+  queryForCheck="select * from usuarios where ?";
   query="update usuarios set member_active=1 where  ?";
-   return db.run2(query, params)
+
+   return db.run2(queryForCheck, params)
     .then(result => {
-      // var res: any;
-      // res = [];
-      // result.records.forEach(r => {
-      //   res.push({ email: r._fields[r._fieldLookup['email']] });
-      // });
-      // if (res.length == 0)
-      //   res = false;
-      // return res;
-      return result;
+      // console.log('estoy en el activate account1 ',result);
+  //el result hay que sacarle el primer object
+      if (result[0].member_active == 1){
+        // console.log('estoy en el activate account1.2 ',result);
+          result.message = 'Your account has been already activated';
+          return result;
+      }else {
+            return db.run2(query, params)  .then(result => {     
+          // console.log('estoy en el activate account3 ',result);
+          result.message = 'Your Account has been activated!';
+          return result;
+          }) .catch(function(err) {
+            console.log(err);
+          });
+       
+      }
+
     })
     .catch(function (err) {
       console.log(err);

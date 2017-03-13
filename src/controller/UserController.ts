@@ -90,7 +90,7 @@ router.post('/register', function(req, res, next) {
            nodemailerMailgun.sendMail({
             from: 'test@gymtrainning.com',
             to: req.body.email, // An array if you have multiple recipients.
-            subject: 'Activate your Process Tempo Account!',
+            subject: 'Activate your Gym Trainning Account!',
             html: '<b>Please click the link below</b><p><a href="'+siteUrl+'/user/activate/' + response.token + '">Activate you account!</a></p>',
             }, function (err, info) {
                 if (err) {
@@ -124,7 +124,7 @@ router.get('/activate/:token', function(req, res) {
       let token = req.params.token;
       userDAO.activateAccount(token).then(data =>
     //    res.json(data)
-      res.render('index', { title: 'Gym Trainning', message: 'Your Account has been activated!'})
+      res.render('index', { title: 'Gym Trainning', message: data.message})
         );
   }
   else

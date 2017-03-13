@@ -73,7 +73,7 @@ exports.router.post('/register', function (req, res, next) {
             nodemailerMailgun.sendMail({
                 from: 'test@gymtrainning.com',
                 to: req.body.email,
-                subject: 'Activate your Process Tempo Account!',
+                subject: 'Activate your Gym Trainning Account!',
                 html: '<b>Please click the link below</b><p><a href="' + siteUrl + '/user/activate/' + response.token + '">Activate you account!</a></p>',
             }, function (err, info) {
                 if (err) {
@@ -99,7 +99,7 @@ exports.router.get('/activate/:token', function (req, res) {
         var token = req.params.token;
         userDAO.activateAccount(token).then(function (data) {
             //    res.json(data)
-            return res.render('index', { title: 'Gym Trainning', message: 'Your Account has been activated!' });
+            return res.render('index', { title: 'Gym Trainning', message: data.message });
         });
     }
     else
