@@ -7,15 +7,16 @@ var pool = mysql.createPool({
     // user: 'b8aa64b5fea4e4',
     // password: '4e42143e',
     // database: 'heroku_5addddbb07eeeed'
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'gymbd'
+    // database: 'heroku_5addddbb07eeeed'
     //NUEVA BD
     // host: 'y0nkiij6humroewt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     // user: 'x6m8w27waqcc3elj',
     // password: 'cbu86c98cmh61zbr',
     // database: 'tzhwb55vp1gmz5g8'
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'gymbd'
 });
 // export function run(query: string, params?: any, callback ?: any)  {
 // var result = null;
