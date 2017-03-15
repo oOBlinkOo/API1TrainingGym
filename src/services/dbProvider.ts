@@ -11,7 +11,7 @@ var pool = mysql.createPool({
    password: '',
    database: 'gymbd'
 
-  // database: 'heroku_5addddbb07eeeed'
+
   //NUEVA BD
   // host: 'y0nkiij6humroewt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
   // user: 'x6m8w27waqcc3elj',
