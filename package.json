@@ -5,20 +5,26 @@
   "scripts": {
     "serve": "npm run update && npm start",
     "start": "node ./bin/www",
-    "update": "node ./node_modules/typescript/bin/tsc"
+    "go": "node ./node_modules/typescript/bin/tsc && copyfiles -u 1  src/views/*.jade ./bin/ && npm start"
+    
+    
   },
   "dependencies": {
     "@types/node": "^7.0.5",
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
+    "copyfiles": "^1.2.0",
     "cors": "^2.8.1",
     "debug": "~2.6.0",
     "express": "~4.14.1",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
     "mysql": "^2.13.0",
+    "nodemailer": "^3.1.5",
+    "nodemailer-mailgun-transport": "^1.2.4",
     "password-hash": "^1.2.2",
     "serve-favicon": "~2.3.2",
-    "typescript": "^2.1.6"
+    "typescript": "^2.1.6",
+    "uuid": "^3.0.1"
   }
 }

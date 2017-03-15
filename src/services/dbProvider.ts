@@ -10,6 +10,14 @@ var pool = mysql.createPool({
    user: 'root',
    password: '',
    database: 'gymbd'
+
+  // database: 'heroku_5addddbb07eeeed'
+  //NUEVA BD
+  // host: 'y0nkiij6humroewt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+  // user: 'x6m8w27waqcc3elj',
+  // password: 'cbu86c98cmh61zbr',
+  // database: 'tzhwb55vp1gmz5g8'
+
 }) ;
 
 
@@ -75,6 +83,7 @@ return new Promise(function (fulfill, reject){
         }
         console.log('2');
         connection.release();
+        // console.log('rowsrows',rows,err,fields);
         fulfill(rows);
 
 
