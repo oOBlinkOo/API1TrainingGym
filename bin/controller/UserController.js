@@ -112,3 +112,10 @@ exports.router.get('/testpitss', function (req, res) {
     //   res.render('index', { title: 'Gym Trainning', message: data.message})
     );
 });
+exports.router.get('/testpitss2', function (req, res) {
+    userDAO.testpitss2().then(function (data) {
+        return res.json(data);
+    }
+    //   res.render('index', { title: 'Gym Trainning', message: data.message})
+    );
+});

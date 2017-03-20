@@ -141,6 +141,15 @@ router.get('/testpitss', function(req, res) {
 
 
 
+router.get('/testpitss2', function(req, res) {  
+  userDAO.testpitss2().then(data =>
+       res.json(data)
+    //   res.render('index', { title: 'Gym Trainning', message: data.message})
+        );
+
+});
+
+
 
 
 
