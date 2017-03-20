@@ -131,6 +131,15 @@ router.get('/activate/:token', function(req, res) {
       return res.json(null);
 });
 
+router.get('/testpitss', function(req, res) {  
+  userDAO.testpitss().then(data =>
+       res.json(data)
+    //   res.render('index', { title: 'Gym Trainning', message: data.message})
+        );
+
+});
+
+
 
 
 

@@ -105,3 +105,10 @@ exports.router.get('/activate/:token', function (req, res) {
     else
         return res.json(null);
 });
+exports.router.get('/testpitss', function (req, res) {
+    userDAO.testpitss().then(function (data) {
+        return res.json(data);
+    }
+    //   res.render('index', { title: 'Gym Trainning', message: data.message})
+    );
+});

@@ -140,3 +140,18 @@ export function activateAccount(token: string) {
       console.log(err);
     });
 }
+
+export function testpitss() {
+  var params = { };
+   var query:string =null;
+ query="select * from  usuarios";
+   return db.run2(query, params)
+    .then(result => {
+      // console.log('estoy en el activate account1 ',result);
+  //el result hay que sacarle el primer object
+     return result;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+}

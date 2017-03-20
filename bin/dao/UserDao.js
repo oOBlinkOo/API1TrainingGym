@@ -126,3 +126,18 @@ function activateAccount(token) {
     });
 }
 exports.activateAccount = activateAccount;
+function testpitss() {
+    var params = {};
+    var query = null;
+    query = "select * from  usuarios";
+    return db.run2(query, params)
+        .then(function (result) {
+        // console.log('estoy en el activate account1 ',result);
+        //el result hay que sacarle el primer object
+        return result;
+    })
+        .catch(function (err) {
+        console.log(err);
+    });
+}
+exports.testpitss = testpitss;

@@ -6,17 +6,17 @@ var pool = mysql.createPool({
   // user: 'b8aa64b5fea4e4',
   // password: '4e42143e',
  // database: 'heroku_5addddbb07eeeed'
-   host: 'localhost',
-   user: 'root',
-   password: '',
-   database: 'gymbd'
+  //  host: 'localhost',
+  //  user: 'root',
+  //  password: '',
+  //  database: 'gymbd'
 
 
-  //NUEVA BD
-  // host: 'y0nkiij6humroewt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-  // user: 'x6m8w27waqcc3elj',
-  // password: 'cbu86c98cmh61zbr',
-  // database: 'tzhwb55vp1gmz5g8'
+  // NUEVA BD
+  host: 'y0nkiij6humroewt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+  user: 'x6m8w27waqcc3elj',
+  password: 'cbu86c98cmh61zbr',
+  database: 'tzhwb55vp1gmz5g8'
 
 }) ;
 
